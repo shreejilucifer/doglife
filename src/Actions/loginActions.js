@@ -1,7 +1,5 @@
-
 export default actions = {
-    onLoginClick: function (username, password) {
-        console.log(username);
-        console.log(password);
+    onLoginClick: function () {
+        console.log( "Button Clicked" ) ;
     }
 }

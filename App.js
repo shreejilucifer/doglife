@@ -3,14 +3,20 @@ import { createStackNavigator, createAppContainer, createSwitchNavigator } from 
 
 // Auth Pages
 import LoginScreen from './src/Pages/LoginScreen';
+import ForgotPassScreen from './src/Pages/ForgotPassScreen';
+import RegisterScreen from './src/Pages/RegisterScreen';
 
 const AuthStack = createStackNavigator({ 
-  Login: LoginScreen
+  Login: LoginScreen, 
+  ForgotPass: ForgotPassScreen, 
+  Register: RegisterScreen,
+}, {
+  initialRouteName: 'Login'
 });
 
 export default createAppContainer(createSwitchNavigator(
   {
-    Auth: AuthStack,
+    Auth: AuthStack
   },
   {
     initialRouteName: 'Auth',

@@ -1,6 +1,10 @@
 import React, { PureComponent } from 'react';
 import { View, Image, Text, TextInput, Keyboard, KeyboardAvoidingView, StyleSheet, TouchableOpacity } from 'react-native';
-import { Font, LinearGradient } from 'expo';
+import { LinearGradient } from 'expo';
+import FontLoader from './Components/FontLoader';
+import FormItem from './Components/FormItem';
+import { SingleColorButton, GradientButton } from './Components/Buttons';
+
 import loginDog from '../../assets/loginDog.webp';
 import paw from '../../assets/paw.webp';
 import bone from '../../assets/bone.webp';
@@ -14,8 +18,7 @@ class LoginScreen extends PureComponent {
         header: null,
     };
 
-    state = {
-        fontLoaded: false, 
+    state = { 
         keyboard: false
     }
 
@@ -32,13 +35,6 @@ class LoginScreen extends PureComponent {
                 this.setState({ keyboard: false });
             }
           );
-
-        await Font.loadAsync({
-          'Big John': require('../../assets/Fonts/BIGJOHN.otf'),
-          'Roboto': require('../../assets/Fonts/Roboto.ttf'),
-        });
-    
-        this.setState({ fontLoaded: true });   
     }
 
     componentWillUnmount() {
@@ -47,10 +43,9 @@ class LoginScreen extends PureComponent {
     }
     
     render(){
-        if( !this.state.fontLoaded ) return <View><Text>Loading</Text></View>;
-
         return (
-            <KeyboardAvoidingView
+            <FontLoader>
+                <KeyboardAvoidingView
                 enabled={true}
                 behavior={'padding'}
                 style={styles.container}>
@@ -93,47 +88,58 @@ class LoginScreen extends PureComponent {
                     >
                         GLIFE
                     </Text>
-                </View> 
+                </View>
+
                 <View style={styles.formContainer}>
-                    <Text style={styles.formLabel}>Email</Text>
-                    <TextInput 
+                    
+                    <FormItem 
+                        label="Email"
                         onChangeText={(text)=>console.log(text)}
-                        style={styles.formInput} 
                     />
-                    <Text style={[styles.formLabel, {marginTop: 20}]}>Password</Text>
-                    <TextInput 
-                        onChangeText={(text)=>console.log(text)}
-                        style={styles.formInput} 
-                    />
-                    <Text style={[styles.formLabel, {textAlign: 'right', marginTop: 5}]}>Forgot Password?</Text>
 
-                    <TouchableOpacity
-                        onPress={()=>actions.onLoginClick("shreeji", "shreeji98")}
-                    >
-                        <LinearGradient 
-                            colors={['#f58524', '#f92b7f']}
-                            start={[0,0]}
-                            end={[1,1]}
-                            style={styles.loginbtn}
-                        >
-                            <Text style={styles.btnText}>Login</Text> 
-                            <Image source={bone} style={styles.btnIcon}/>   
-                        </LinearGradient>
+                    <FormItem 
+                        label="Password"
+                        labelStyle={{marginTop: 20}}
+                        onChangeText={(text)=>console.log(text)}
+                    />
+
+                    <TouchableOpacity onPress={()=>{
+                        this.props.navigation.navigate('ForgotPass');
+                    }}>
+                        <Text style={[styles.formLabel, {textAlign: 'right', marginTop: 5}]}>
+                            Forgot Password?
+                        </Text>
                     </TouchableOpacity>
+                    
+                    <GradientButton 
+                        text="Login"
+                        image={bone}
+                        onPress={() => actions.onLoginClick()}
+                    />
 
-                    <View style={[styles.loginbtn, styles.fbloginbtn]}>
-                        <Text style={styles.btnText}>Login With Facebook</Text> 
-                        <Image source={fbicon} style={styles.btnIcon}/>     
-                    </View>
+                    <SingleColorButton 
+                        bgcolor="#3c5a99"
+                        text="Login With Facebook"
+                        image={fbicon}
+                        onPress={() => actions.onLoginClick()}
+                    />
 
                     <View style={{ marginTop: 10, width: '100%', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={styles.noAccount}>
                             You don't have any account?                
                         </Text>
-                        <Text style={styles.noAccountRegister}> Register</Text>
+                        <TouchableOpacity
+                            onPress={()=>{
+                                this.props.navigation.navigate('Register');
+                            }}
+                        >
+                            <Text style={styles.noAccountRegister}> Register</Text>
+                        </TouchableOpacity>
+                        
                     </View>
                 </View> 
             </KeyboardAvoidingView>
+            </FontLoader>
         );
     }
 }
