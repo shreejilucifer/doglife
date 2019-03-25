@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Image, Text, TextInput, Keyboard, KeyboardAvoidingView, StyleSheet, TouchableOpacity } from 'react-native';
-import { LinearGradient } from 'expo';
+import { View, Image, Text, Keyboard, KeyboardAvoidingView, StyleSheet, TouchableOpacity } from 'react-native';
 import FontLoader from './Components/FontLoader';
 import FormItem from './Components/FormItem';
 import { SingleColorButton, GradientButton } from './Components/Buttons';
