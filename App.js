@@ -27,22 +27,24 @@ import RegisterScreen from './src/Pages/RegisterScreen';
 
 // App Pages 
 import HomeScreen from './src/Pages/HomeScreen';
+import NewsScreen from './src/Pages/NewsScreen';
 
 const AuthStack = createStackNavigator({ 
   Login: LoginScreen, 
   ForgotPass: ForgotPassScreen, 
   Register: RegisterScreen,
 }, {
-  initialRouteName: 'Register'
+  initialRouteName: 'Login'
 });
 
 const AppStack = createBottomTabNavigator({
   Home: HomeScreen, 
-  News: HomeScreen, 
+  News: NewsScreen, 
   Post: HomeScreen, 
   Notification: HomeScreen, 
   Settings: HomeScreen
 }, {
+  initialRouteName: 'News',
   defaultNavigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused, tintColor }) => {
       const { routeName } = navigation.state;
@@ -111,8 +113,7 @@ export default createAppContainer(createSwitchNavigator(
   {
     Auth: AuthStack, 
     App: AppStack
-  },
-  {
-    initialRouteName: 'App',
+  },{
+    initialRouteName: 'App'
   }
 ));
