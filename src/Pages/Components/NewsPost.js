@@ -17,17 +17,19 @@ class NewsPost extends PureComponent {
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
+        alignSelf: 'center',
+        width: '95%',
         flexDirection: 'row', 
-        shadowColor: '#000',
-        shadowOffset: { width: 1, height: 2 },
-        shadowRadius: 17,
         borderRadius: 7,
         backgroundColor: '#ffffff',
-        borderWidth: 1, 
-        borderColor: 'rgba(0, 4, 55, 0.06)',
         padding: 10, 
-        marginBottom: 10
+        marginTop: 10, 
+        marginBottom: 5, 
+        shadowColor: 'rgba(0, 4, 55, 0.02)',
+        shadowOffset: { width: 7, height: 0 },
+        shadowRadius: 17,
+        borderRadius: 7,
+        elevation: 3,
     }, 
     newsPostImage: {
         height: 75, 

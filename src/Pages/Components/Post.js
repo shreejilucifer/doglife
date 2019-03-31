@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native'; 
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'; 
 import shareicon from '../../../assets/shareicon.webp';
 import postpaw from '../../../assets/postpaw.webp';
 import postbone from '../../../assets/postbone.webp';
@@ -24,7 +24,9 @@ class Post extends PureComponent {
                             <Text style={styles.time}>{time}</Text>
                         </View>
                     </View>
-                    <Image source={shareicon} style={styles.shareicon} />
+                    <TouchableOpacity onPress={()=>console.log( "Reshare")}>
+                        <Image source={shareicon} style={styles.shareicon} />
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.postImageContainer}>
                     <Image source={image} style={styles.postimage} />
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.8,
         shadowRadius: 20,
-        elevation: 1,
+        elevation: 5,
     }, 
     headerContainer: {
         flexDirection: 'row', 

@@ -48,7 +48,6 @@ class LoginScreen extends PureComponent {
                 enabled={true}
                 behavior={'padding'}
                 style={styles.container}>
-                <OfflineNotice />
                 
                 <Image 
                     source={loginDog} 
@@ -113,7 +112,7 @@ class LoginScreen extends PureComponent {
                     <GradientButton 
                         text="Login"
                         image={bone}
-                        onPress={() => actions.onLoginClick()}
+                        onPress={() => this.props.navigation.navigate('App') }
                     />
 
                     <SingleColorButton 

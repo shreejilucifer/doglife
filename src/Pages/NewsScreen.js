@@ -10,6 +10,7 @@ class NewsScreen extends PureComponent {
         return (
             <FontLoader>
                 <NavbarTextOnly text="News" />
+                <View style={styles.scrollContainer}>
                 <ScrollView style={styles.container}>
                     <NewsPost 
                         image={newspostimage}
@@ -52,6 +53,7 @@ class NewsScreen extends PureComponent {
                         data="Lorem ipsum dolor sit amet, consectetur adipicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim…"
                     />
                 </ScrollView>
+                </View>
             </FontLoader>
         );
     }
@@ -59,13 +61,12 @@ class NewsScreen extends PureComponent {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1, 
         backgroundColor: '#fcfdfe',
-        paddingTop: 15, 
-        paddingLeft: 15, 
-        paddingRight: 15, 
+        marginTop: 7,  
         width: '100%', 
-        paddingBottom: 20, 
+    }, 
+    scrollContainer: {
+        flex: 1,  
     }
 });
 

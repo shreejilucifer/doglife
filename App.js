@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { Image } from 'react-native';
 import { 
   TabBarBottom, 
   createStackNavigator, 
@@ -28,6 +28,9 @@ import RegisterScreen from './src/Pages/RegisterScreen';
 // App Pages 
 import HomeScreen from './src/Pages/HomeScreen';
 import NewsScreen from './src/Pages/NewsScreen';
+import NotificationScreen from './src/Pages/NotificationScreen';
+import SettingsScreen from './src/Pages/SettingsScreen';
+import NewPostScreen from './src/Pages/NewPostScreen';
 
 const AuthStack = createStackNavigator({ 
   Login: LoginScreen, 
@@ -40,11 +43,11 @@ const AuthStack = createStackNavigator({
 const AppStack = createBottomTabNavigator({
   Home: HomeScreen, 
   News: NewsScreen, 
-  Post: HomeScreen, 
-  Notification: HomeScreen, 
-  Settings: HomeScreen
+  Post: NewPostScreen, 
+  Notification: NotificationScreen, 
+  Settings: SettingsScreen
 }, {
-  initialRouteName: 'News',
+  initialRouteName: 'Post',
   defaultNavigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused, tintColor }) => {
       const { routeName } = navigation.state;
