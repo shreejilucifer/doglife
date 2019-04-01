@@ -47,6 +47,7 @@ class NewPostScreen extends PureComponent {
                     onBackPress={()=>console.log("Back Press")}
                     onRightPress={()=>console.log("OnRightPresss")}
                     text="New Post" 
+                    right
                 />
                 <View style={styles.container}>
                     <View style={{ flexDirection: 'column' }}>

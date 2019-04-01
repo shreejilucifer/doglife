@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native'; 
+import { View, ScrollView, StyleSheet } from 'react-native'; 
 import FontLoader from './Components/FontLoader';
 import { NavbarHome } from './Components/Navbar';
 import Post from './Components/Post';
@@ -11,7 +11,9 @@ class HomeScreen extends PureComponent {
         return (
             <FontLoader>
                 <View style={styles.container}>
-                    <NavbarHome />
+                    <NavbarHome 
+                        onLeftPress={()=>this.props.navigation.navigate('MyProfile')}
+                    />
                     <ScrollView>
                         <Post 
                             propic={postpropic} 

@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'; 
 import shareicon from '../../../assets/shareicon.webp';
+import editicon from '../../../assets/editicon.webp';
+import deleteicon from '../../../assets/deleteicon.webp';
 import postpaw from '../../../assets/postpaw.webp';
 import postbone from '../../../assets/postbone.webp';
 
@@ -24,9 +26,27 @@ class Post extends PureComponent {
                             <Text style={styles.time}>{time}</Text>
                         </View>
                     </View>
-                    <TouchableOpacity onPress={()=>console.log( "Reshare")}>
-                        <Image source={shareicon} style={styles.shareicon} />
-                    </TouchableOpacity>
+                    <View style={styles.headerRightContainer}>
+                        <TouchableOpacity onPress={()=>console.log( "Reshare")}>
+                            <Image source={shareicon} style={styles.shareicon} />
+                        </TouchableOpacity>
+                        {
+                            (this.props.edit)?
+                            <TouchableOpacity 
+                                style={{ marginLeft: 10 }}
+                                onPress={this.props.onEditPress}>
+                                <Image source={editicon} style={styles.shareicon} />
+                            </TouchableOpacity> : <></>
+                        }
+                        {
+                            (this.props.delete)?
+                            <TouchableOpacity 
+                                style={{ marginLeft: 10 }}
+                                onPress={this.props.onDeletePress}>
+                                <Image source={deleteicon} style={styles.shareicon} />
+                            </TouchableOpacity> : <></>
+                        }
+                    </View>   
                 </View>
                 <View style={styles.postImageContainer}>
                     <Image source={image} style={styles.postimage} />
@@ -75,6 +95,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center'
     }, 
+    headerRightContainer: {
+        flexDirection: 'row', 
+        justifyContent: 'center', 
+        alignItems: 'flex-end'
+    },
     nameContainer: {
         flexDirection: 'column', 
         alignItems: 'flex-start', 
@@ -97,7 +122,7 @@ const styles = StyleSheet.create({
         width: '100%'
     }, 
     postimage: {
-        height: 300, 
+        height: 225, 
         width: '100%', 
     }, 
     likeContainer: {

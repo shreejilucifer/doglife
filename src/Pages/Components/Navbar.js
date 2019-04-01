@@ -31,9 +31,13 @@ class NavbarHome extends PureComponent {
     render(){
         return (
                 <View style={styles.container}>
-                    <Image source={propic} style={styles.propic}/>
+                    <TouchableOpacity onPress={this.props.onLeftPress}>
+                        <Image source={propic} style={styles.propic}/>
+                    </TouchableOpacity> 
                     <Logo styles={styles} />
-                    <Image source={searchicon} style={styles.searchicon} />
+                    <TouchableOpacity onPress={this.props.onRightPress}>
+                        <Image source={searchicon} style={styles.searchicon} />
+                    </TouchableOpacity>
                 </View>
         );
     }
@@ -54,27 +58,37 @@ class NavbarWithBothSides extends PureComponent {
         return (
             <View style={styles.bothContainer}>
             
-                <TouchableOpacity
-                    style={{ width: '33.33%', justifyContent: 'center', alignItems: 'flex-start'}}
-                    onPress={this.props.onBackPress}
-                >
-                    <Image source={backbtn} style={styles.backbtn}/>
-                </TouchableOpacity>
+                {
+                    (this.props.back)?
+                        <TouchableOpacity
+                            style={{ width: '33.33%', justifyContent: 'center', alignItems: 'flex-start'}}
+                            onPress={this.props.onBackPress}
+                        >
+                            <Image source={backbtn} style={styles.backbtn}/>
+                        </TouchableOpacity>
+                        :
+                        <View style={{ width: '33.33%', justifyContent: 'center', alignItems: 'flex-start'}}></View>
+                }
 
                 <View style={{ width: '33.33%', justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={styles.textOnlyText}>{this.props.text}</Text>
                 </View>
 
-                <TouchableOpacity 
+                {
+                    (this.props.right)?
+                    <TouchableOpacity 
                     onPress={this.props.onRightPress}
                     style={{ width: '33.33%', justifyContent: 'center', alignItems: 'flex-end'}}>
-                {
-                (this.props.flag)?
-                    <Image source={flag} style={styles.flag} />
-                        :
-                    <Text style={styles.cancelText}>Cancel</Text>
+                        {
+                        (this.props.flag)?
+                            <Image source={flag} style={styles.flag} />
+                                :
+                            <Text style={styles.cancelText}>Cancel</Text>
+                        }
+                    </TouchableOpacity>  
+                    :
+                    <View style={{ width: '33.33%', justifyContent: 'center', alignItems: 'flex-end'}}></View>  
                 }
-                </TouchableOpacity>    
             </View>
     );        
     }

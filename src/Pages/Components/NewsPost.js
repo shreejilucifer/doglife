@@ -1,16 +1,16 @@
 import React, { PureComponent } from 'react'; 
-import { View, Text, Image, StyleSheet } from 'react-native'; 
+import { TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native'; 
 
 class NewsPost extends PureComponent {
     render(){
         return (
-            <View style={styles.container}>
+            <TouchableOpacity onPress={this.props.onPress} style={styles.container}>
                 <Image source={this.props.image} style={styles.newsPostImage}/>
                 <View style={styles.newsDataContainer}>
                     <Text style={styles.newsHeading}>{this.props.title}</Text>
                     <Text style={styles.newsData}>{this.props.data}</Text>
                 </View>
-            </View>
+            </TouchableOpacity>
         );
     }
 }

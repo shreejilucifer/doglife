@@ -31,6 +31,9 @@ import NewsScreen from './src/Pages/NewsScreen';
 import NotificationScreen from './src/Pages/NotificationScreen';
 import SettingsScreen from './src/Pages/SettingsScreen';
 import NewPostScreen from './src/Pages/NewPostScreen';
+import MyProfileScreen from './src/Pages/MyProfileScreen';
+import EditPostScreen from './src/Pages/EditPostScreen';
+import NewsDetailsScreen from './src/Pages/NewsDetailsScreen';
 
 const AuthStack = createStackNavigator({ 
   Login: LoginScreen, 
@@ -45,9 +48,9 @@ const AppStack = createBottomTabNavigator({
   News: NewsScreen, 
   Post: NewPostScreen, 
   Notification: NotificationScreen, 
-  Settings: SettingsScreen
+  Settings: SettingsScreen, 
 }, {
-  initialRouteName: 'Post',
+  initialRouteName: 'Home',
   defaultNavigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused, tintColor }) => {
       const { routeName } = navigation.state;
@@ -115,8 +118,11 @@ const AppStack = createBottomTabNavigator({
 export default createAppContainer(createSwitchNavigator(
   {
     Auth: AuthStack, 
-    App: AppStack
+    App: AppStack, 
+    MyProfile: MyProfileScreen, 
+    EditPost: EditPostScreen,
+    NewsDetails: NewsDetailsScreen,
   },{
-    initialRouteName: 'App'
+    initialRouteName: 'App',
   }
 ));

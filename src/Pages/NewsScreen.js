@@ -13,6 +13,7 @@ class NewsScreen extends PureComponent {
                 <View style={styles.scrollContainer}>
                 <ScrollView style={styles.container}>
                     <NewsPost 
+                        onPress={()=>this.props.navigation.navigate('NewsDetails')}
                         image={newspostimage}
                         title="Dogs Are Even More Like Us..."
                         data="Lorem ipsum dolor sit amet, consectetur adipicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim…"
