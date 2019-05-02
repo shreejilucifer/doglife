@@ -36,7 +36,7 @@ class Post extends PureComponent {
                                 style={{ marginLeft: 10 }}
                                 onPress={this.props.onEditPress}>
                                 <Image source={editicon} style={styles.shareicon} />
-                            </TouchableOpacity> : <></>
+                            </TouchableOpacity> : <React.Fragment></React.Fragment>
                         }
                         {
                             (this.props.delete)?
@@ -44,7 +44,7 @@ class Post extends PureComponent {
                                 style={{ marginLeft: 10 }}
                                 onPress={this.props.onDeletePress}>
                                 <Image source={deleteicon} style={styles.shareicon} />
-                            </TouchableOpacity> : <></>
+                            </TouchableOpacity> : <React.Fragment></React.Fragment>
                         }
                     </View>   
                 </View>

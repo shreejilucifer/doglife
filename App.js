@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { 
   TabBarBottom, 
   createStackNavigator, 
@@ -14,6 +14,7 @@ import newsicon from './assets/bottombarnews.webp';
 import plusicon from './assets/whiteplus.webp';
 import notificationicon from './assets/bottombarnotification.webp';
 import settingsicon from './assets/bottombarsettings.webp';
+import activedot from './assets/activedot.webp';
 
 import homeiconactive from './assets/bottombaractivehome.webp';
 import newsiconactive from './assets/bottombaractivenews.webp';
@@ -40,8 +41,25 @@ const AuthStack = createStackNavigator({
   ForgotPass: ForgotPassScreen, 
   Register: RegisterScreen,
 }, {
-  initialRouteName: 'Login'
+  initialRouteName: 'Register'
 });
+
+const Dot = (props) => {
+  return (
+      <Image 
+        source={activedot} 
+        style={{
+          height: 7, 
+          width: 7, 
+          transform: [{ translateY: -25 }],
+          position: 'absolute', 
+          zIndex: 1, 
+          justifyContent: 'center', 
+          alignItems: 'center' 
+        }}/>
+  );
+}
+
 
 const AppStack = createBottomTabNavigator({
   Home: HomeScreen, 
@@ -58,14 +76,25 @@ const AppStack = createBottomTabNavigator({
       if( routeName === 'Home' ) {
           if( focused ) {
             return (
-                <Image source={homeiconactive} style={{height: 25, width: 30}} />
+                <View style={{ height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                  <Dot />
+                  <Image 
+                    source={homeiconactive} 
+                    style={{height: 25, width: 30}} 
+                  />
+                </View>
             );
           } else {
             return <Image source={homeicon} style={{height: 25, width: 30}} /> ; 
           }
       } else if( routeName === 'News' ) {
         if( focused ) {
-          return <Image source={newsiconactive} style={{height: 25, width: 25}} />;
+          return (
+            <View style={{ height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+              <Dot />
+              <Image source={newsiconactive} style={{height: 25, width: 25}} />
+            </View>
+          );
         } else {
           return <Image source={newsicon} style={{height: 25, width: 25, opacity: 0.5}} />;
         }
@@ -88,13 +117,23 @@ const AppStack = createBottomTabNavigator({
         );
       } else if( routeName === 'Notification' ) {
         if( focused ) {
-          return <Image source={notificationactive} style={{height: 28, width: 25}} />;
+          return (
+            <View style={{ height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+              <Dot/>
+              <Image source={notificationactive} style={{height: 28, width: 25}} />
+            </View>
+          );
         } else {
           return <Image source={notificationicon} style={{height: 28, width: 25, opacity: 0.5}} />;
         }
       } else if( routeName === 'Settings' ) {
         if( focused ) {
-          return <Image source={settingsiconactive} style={{height: 28, width: 28}} />;
+          return (
+            <View style={{ height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+              <Dot />
+              <Image source={settingsiconactive} style={{height: 28, width: 28}} />
+            </View> 
+          );
         } else {
           return <Image source={settingsicon} style={{height: 28, width: 28, opacity: 0.5}} />;
         }
@@ -123,6 +162,6 @@ export default createAppContainer(createSwitchNavigator(
     EditPost: EditPostScreen,
     NewsDetails: NewsDetailsScreen,
   },{
-    initialRouteName: 'App',
+    initialRouteName: 'Auth',
   }
 ));

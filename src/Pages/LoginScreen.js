@@ -3,13 +3,19 @@ import { View, Image, Text, Keyboard, KeyboardAvoidingView, StyleSheet, Touchabl
 import FontLoader from './Components/FontLoader';
 import FormItem from './Components/FormItem';
 import { SingleColorButton, GradientButton } from './Components/Buttons';
+import { Bubbles } from 'react-native-loader';
 
 import loginDog from '../../assets/loginDog.webp';
 import paw from '../../assets/paw.webp';
 import bone from '../../assets/bone.webp';
 import fbicon from '../../assets/fbicon.webp';
-import OfflineNotice from './Components/OfflineNotice';
 import actions from '../Actions/loginActions';
+
+const LoaderButton = (props) => (
+    <View style={styles.loaderBtnContainer}>
+        <Bubbles size={10} color="#f92b7f" />
+    </View>
+);
 
 class LoginScreen extends PureComponent {
 
@@ -18,7 +24,12 @@ class LoginScreen extends PureComponent {
     };
 
     state = { 
-        keyboard: false
+        keyboard: false, 
+        loadingLoginNormal: false, 
+        loadingLoginFacebook: false,
+        errorMsg: "", 
+        email: "", 
+        password: ""
     }
 
     async componentDidMount(){
@@ -40,24 +51,59 @@ class LoginScreen extends PureComponent {
         this.keyboardDidShowListener.remove();
         this.keyboardDidHideListener.remove();
     }
+
+    async onLoginClick(email, password) {
+        this.setState({ loadingLoginNormal: true });
+
+        if( email === "" ) 
+            this.setState({ loadingLoginNormal: false, errorMsg: "Email Cannot be Empty !" });
+        else if( password === "" ) 
+            this.setState({ loadingLoginNormal: false, errorMsg: "Password Cannot be Empty !" });
+        else {
+            const user = await actions.login(email, password);
+
+            if( user ) { 
+                this.setState({ loadingLoginNormal: false, errorMsg: "" });
+                this.props.navigation.navigate('App');
+            } else {
+                this.setState({ loadingLoginNormal: false, errorMsg: "Email Or Password Wrong !" });
+            }
+            
+        }  
+    }
+
+    onLoginWithFacebookClick() {
+        this.setState({ loadingLoginFacebook: true });
+        //this.props.navigation.navigate('App');
+    }
+
+    onLoginFormChange( type, value ) {
+        switch( type ) {
+            case 'email': this.setState({ email: value }); break;
+            case 'password': this.setState({ password: value }); break;
+            default: console.log( "Invalid Input" );
+        }
+    }
     
     render(){
         return (
             <FontLoader>
                 <KeyboardAvoidingView
-                enabled={true}
-                behavior={'padding'}
-                style={styles.container}>
+                    enabled={true}
+                    behavior={'padding'}
+                    style={(this.state.keyboard)? styles.containerKeyboard:styles.container}>
                 
-                <Image 
-                    source={loginDog} 
-                    style={
-                        (this.state.keyboard)? 
-                            styles.loginDogImageKeyboard 
-                                : 
-                            styles.loginDogImage
-                    } 
-                />
+                <View 
+                    style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <Image 
+                        source={loginDog} 
+                        style={
+                            (this.state.keyboard)? 
+                                styles.loginDogImageKeyboard 
+                                    : 
+                                styles.loginDogImage
+                        } 
+                    />
 
                 <View style={styles.logoTextContainer}>
                     <Text style={
@@ -87,18 +133,20 @@ class LoginScreen extends PureComponent {
                         GLIFE
                     </Text>
                 </View>
+                </View>
 
                 <View style={styles.formContainer}>
                     
                     <FormItem 
                         label="Email"
-                        onChangeText={(text)=>console.log(text)}
+                        onChangeText={(text)=>this.onLoginFormChange('email', text)}
                     />
 
                     <FormItem 
+                        password={true}
                         label="Password"
                         labelStyle={{marginTop: 20}}
-                        onChangeText={(text)=>console.log(text)}
+                        onChangeText={(text)=>this.onLoginFormChange('password', text)}
                     />
 
                     <TouchableOpacity onPress={()=>{
@@ -108,19 +156,33 @@ class LoginScreen extends PureComponent {
                             Forgot Password?
                         </Text>
                     </TouchableOpacity>
-                    
-                    <GradientButton 
-                        text="Login"
-                        image={bone}
-                        onPress={() => this.props.navigation.navigate('App') }
-                    />
 
-                    <SingleColorButton 
-                        bgcolor="#3c5a99"
-                        text="Login With Facebook"
-                        image={fbicon}
-                        onPress={() => actions.onLoginClick()}
-                    />
+                    <View style={styles.errorContainer}>
+                        <Text style={styles.error}>{this.state.errorMsg}</Text>
+                    </View>
+                    
+                    {
+                        (this.state.loadingLoginNormal)? 
+                        <LoaderButton /> 
+                            :
+                        <GradientButton 
+                            text="Login"
+                            image={bone}
+                            onPress={()=>this.onLoginClick(this.state.email, this.state.password)}
+                        />
+                    }
+                    
+                    {
+                        (this.state.loadingLoginFacebook)?
+                        <LoaderButton />
+                            :
+                        <SingleColorButton 
+                            bgcolor="#3c5a99"
+                            text="Login With Facebook"
+                            image={fbicon}
+                            onPress={()=>this.onLoginWithFacebookClick()}
+                        />
+                    }
 
                     <View style={{ marginTop: 10, width: '100%', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={styles.noAccount}>
@@ -145,24 +207,29 @@ class LoginScreen extends PureComponent {
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
-        alignItems: 'center'
+        flexDirection: 'column', 
+        alignItems: 'center',
+        justifyContent: 'space-around'
+    },
+    containerKeyboard: {
+        flex: 1, 
+        flexDirection: 'column', 
+        alignItems: 'center',
+        justifyContent: 'flex-start'
     },
     loginDogImage: { 
-        marginTop: 100,
         height: 150, 
         width: 150
     }, 
     loginDogImageKeyboard: { 
-        marginTop: 30,
+        marginTop: 45, 
         height: 70, 
         width: 70
     },
-    logoTextContainer: {
+    logoTextContainer: { 
         marginTop: 15, 
         width: '100%', 
-        flexDirection: 'row',
-        justifyContent: 'center', 
-        alignItems: 'center', 
+        flexDirection: 'row'
     },
     logoText: {
         color: '#f75356',
@@ -248,6 +315,18 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontWeight: '500',
         opacity: 1, 
+    }, 
+    loaderBtnContainer: {
+        width: '100%', 
+        marginTop: 25,
+        height: 45, 
+        flexDirection: 'row', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        borderRadius: 5, 
+        paddingLeft: 20, 
+        paddingRight: 20, 
+        backgroundColor: '#d3d3d3'
     }
 })
 

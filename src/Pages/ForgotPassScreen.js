@@ -56,10 +56,10 @@ class ForgotPassScreen extends PureComponent {
                         (this.state.keyboard)?
                         <View></View>
                             :
-                        <>
+                        <React.Fragment>
                         <Text style={styles.logoIconTitle}>Forgot Your Password ?</Text>
                         <Text style={styles.logoIconText}>Please enter the email address associated with your email. We will email you a link to reset your password.</Text>
-                        </>
+                        </React.Fragment>
                     }
                 </View>
                 <View style={styles.formContainer}>

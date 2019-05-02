@@ -26,7 +26,7 @@ const SingleColorButton = (props) => {
             </Text> 
 
             {
-                (props.image)? <Image source={props.image} style={styles.btnIcon}/> : <></>
+                (props.image)? <Image source={props.image} style={styles.btnIcon}/> : <React.Fragment></React.Fragment>
             }   
 
         </TouchableOpacity>
@@ -54,7 +54,7 @@ const GradientButton = (props) => {
             >
                 <Text style={textstyles}>{props.text}</Text> 
                 {
-                    (props.image)? <Image source={props.image} style={styles.btnIcon}/> : <></>
+                    (props.image)? <Image source={props.image} style={styles.btnIcon}/> : <React.Fragment></React.Fragment>
                 }   
             </LinearGradient>
     </TouchableOpacity>

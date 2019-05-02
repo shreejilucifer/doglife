@@ -1,21 +1,22 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Text, TextInput, StyleSheet } from 'react-native';
 
 const FormItem = (props) => {
     let labelStyle = { ...styles.formLabel, ...props.labelStyle };
 
     return (
-        <>
+        <Fragment>
             <Text 
                 style={labelStyle}
             >
                 {props.label}
             </Text>
             <TextInput 
+                secureTextEntry={props.password}
                 onChangeText={(text)=>props.onChangeText(text)}
                 style={styles.formInput} 
             />
-        </>
+        </Fragment>
     );
 }
 

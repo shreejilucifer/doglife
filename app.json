@@ -16,6 +16,13 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
+    "android": {
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -24,6 +31,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": ""
   }
 }

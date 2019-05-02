@@ -15,25 +15,18 @@ class HomeScreen extends PureComponent {
                         onLeftPress={()=>this.props.navigation.navigate('MyProfile')}
                     />
                     <ScrollView>
-                        <Post 
-                            propic={postpropic} 
-                            name="Baxter Johnson" 
-                            time="5:30 PM"
-                            image={postimage} 
-                            bones={42} 
-                            snaps={20} 
-                            data="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor amet..." 
-                        />
-                        <View style={{ height: 10 }}></View>
-                        <Post 
-                            propic={postpropic} 
-                            name="Baxter Johnson" 
-                            time="5:30 PM"
-                            image={postimage} 
-                            bones={42} 
-                            snaps={20} 
-                            data="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor amet..." 
-                        />
+                        <View key={post.id}>
+                            <Post 
+                                propic={postpropic} 
+                                name={post.author.name} 
+                                time="5:30 PM"
+                                image={postimage} 
+                                bones={42} 
+                                snaps={20} 
+                                data={post.content}
+                            />
+                            <View style={{ height: 10 }}></View>
+                        </View>
                     </ScrollView>
                 </View>
             </FontLoader>

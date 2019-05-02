@@ -7,6 +7,7 @@ import { GradientButton } from './Components/Buttons';
 import registerdogbtn from '../../assets/registerdogbtn.webp';
 import registerpropic from '../../assets/registerpropic.webp';
 import whiteplus from '../../assets/whiteplus.webp';
+import actions from '../Actions/loginActions';
 
 class RegisterScreen extends PureComponent {
     static navigationOptions = {
@@ -14,7 +15,7 @@ class RegisterScreen extends PureComponent {
     };
 
     state = { 
-        keyboard: false
+        keyboard: false, 
     }
 
     async componentDidMount(){
@@ -36,6 +37,10 @@ class RegisterScreen extends PureComponent {
         this.keyboardDidShowListener.remove();
         this.keyboardDidHideListener.remove();
     }
+
+    onPlusClick = () => {
+
+    }
     
     render(){
         return (
@@ -54,7 +59,9 @@ class RegisterScreen extends PureComponent {
                             styles.iconContainer
                         }>
                         <Image 
-                            source={registerpropic} 
+                            source={
+                                (this.state.image)? { uri: this.state.image } : registerpropic
+                            } 
                             style={
                                 (this.state.keyboard)?
                                     styles.iconKeyboard
@@ -63,18 +70,18 @@ class RegisterScreen extends PureComponent {
                             }
                         />    
                         <TouchableOpacity
-                            onPress={()=>console.log("Plus Clicked")}
+                            onPress={this.onPlusClick}
                         >
-                            <LinearGradient 
-                                colors={['#f58524', '#f92b7f']}
-                                style={
-                                    (this.state.keyboard)?
-                                        styles.plusContainerKeyboard: styles.plusContainer
-                                }
-                            >
-                                <Image source={whiteplus} style={styles.plus}/>
-                            </LinearGradient>
-                        </TouchableOpacity>
+                        <LinearGradient 
+                            colors={['#f58524', '#f92b7f']}
+                            style={
+                                (this.state.keyboard)?
+                                    styles.plusContainerKeyboard: styles.plusContainer
+                            }
+                        >
+                            <Image source={whiteplus} style={styles.plus}/>
+                        </LinearGradient>
+                    </TouchableOpacity>
                     </View>
                     <View style={styles.formContainer}>
                         <FormItem 
@@ -87,11 +94,13 @@ class RegisterScreen extends PureComponent {
                             onChangeText={(text)=>console.log(text)}
                         />
                         <FormItem 
+                            password={true}
                             label="Password"
                             labelStyle={{marginTop: 20}}
                             onChangeText={(text)=>console.log(text)}
                         />
                         <FormItem
+                            password={true}
                             label="Confirm Password"
                             labelStyle={{marginTop: 20}}
                             onChangeText={(text)=>console.log(text)}
@@ -171,11 +180,14 @@ const styles = StyleSheet.create({
     },
     icon: {
         width: 150, 
-        height: 150
+        height: 150,
+        borderRadius: 75
     }, 
     iconKeyboard: {
+        marginTop: 2,
         width: 70, 
         height: 70, 
+        borderRadius: 35
     }, 
     plusContainer: {
         marginTop: -25, 

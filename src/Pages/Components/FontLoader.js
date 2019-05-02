@@ -22,10 +22,10 @@ class FontLoader extends PureComponent {
     render(){
         if( this.state.fontLoaded ) 
         return (
-            <>
+            <React.Fragment>
                 <OfflineNotice />
                 {this.props.children}
-            </>
+            </React.Fragment>
         ); 
         else 
         return (

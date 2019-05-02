@@ -754,7 +754,7 @@
     pirates "^4.0.0"
     source-map-support "^0.5.9"
 
-"@babel/runtime@^7.1.2":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.3.1":
   version "7.4.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.2.tgz#f5ab6897320f16decd855eed70b705908a313fe8"
   integrity sha512-7Bl2rALb7HpvXFL7TETNzKSAeBVCPHELzc0C//9FCxN8nsiueWSJBqaF+2oIJScyILStASR/Cx5WMkXGYTiJFA==
@@ -4751,6 +4751,11 @@ react-native-gesture-handler@~1.0.14:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
+react-native-loader@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-loader/-/react-native-loader-1.2.1.tgz#e08589a89cfcd076595b9301c1d618f54da73329"
+  integrity sha1-4IWJqJz80HZZW5MBwdYY9U2nMyk=
+
 react-native-maps@expo/react-native-maps#v0.22.1-exp.0:
   version "0.22.1"
   resolved "https://codeload.github.com/expo/react-native-maps/tar.gz/e6f98ff7272e5d0a7fe974a41f28593af2d77bb2"
@@ -4905,6 +4910,13 @@ react-proxy@^1.1.7:
   dependencies:
     lodash "^4.6.1"
     react-deep-force-update "^1.0.0"
+
+react-spring@^8.0.18:
+  version "8.0.18"
+  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-8.0.18.tgz#f6fa09ab5acdeb37618c0e340d59830171b95c33"
+  integrity sha512-gb1Rtsnez2gxIHtbrbwQsAjE4ir/62m+gI+eT+1E0Uky5L1PbLccbywRIdIpK3W5jiNmU6OlEazVk0tfI8pZrA==
+  dependencies:
+    "@babel/runtime" "^7.3.1"
 
 react-timer-mixin@^0.13.2:
   version "0.13.4"

@@ -1,5 +1,5 @@
 export default actions = {
-    onLoginClick: function () {
-        console.log( "Button Clicked" ) ;
-    }
+    login: async function (email, password) {
+      console.log( email, password ); 
+    }, 
 }
