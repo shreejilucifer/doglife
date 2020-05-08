@@ -7,16 +7,27 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "^32.0.0",
-    "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "@react-native-community/masked-view": "0.1.10",
+    "@react-native-community/netinfo": "^5.8.0",
+    "@react-navigation/bottom-tabs": "^5.4.1",
+    "@react-navigation/native": "^5.2.6",
+    "@react-navigation/stack": "^5.3.1",
+    "expo": "^37.0.8",
+    "expo-font": "~8.1.0",
+    "expo-linear-gradient": "~8.1.0",
+    "react": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
+    "react-native-gesture-handler": "~1.6.1",
     "react-native-loader": "^1.2.1",
-    "react-navigation": "^3.5.1",
-    "react-spring": "^8.0.18",
+    "react-native-reanimated": "~1.8.0",
+    "react-native-safe-area-context": "0.7.3",
+    "react-native-screens": "~2.7.0",
+    "react-navigation": "^4.3.9",
+    "react-spring": "^8.0.27",
     "rn-sliding-button": "^1.1.5"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.0.0"
+    "babel-preset-expo": "^8.1.0"
   },
   "private": true
 }

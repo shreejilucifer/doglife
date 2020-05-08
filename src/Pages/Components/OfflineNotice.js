@@ -1,57 +1,61 @@
 import React, { PureComponent } from 'react';
-import { View, Text, NetInfo, Dimensions, StyleSheet } from 'react-native';
+import { View, Text, Dimensions, StyleSheet } from 'react-native';
+import NetInfo from '@react-native-community/netinfo';
 
 const { width } = Dimensions.get('window');
 
 function MiniOfflineSign() {
-  return (
-    <View style={styles.offlineContainer}>
-      <Text style={styles.offlineText}>No Internet Connection</Text>
-    </View>
-  );
+	return (
+		<View style={styles.offlineContainer}>
+			<Text style={styles.offlineText}>No Internet Connection</Text>
+		</View>
+	);
 }
 
+let unsubscribe;
 class OfflineNotice extends PureComponent {
-  state = {
-    isConnected: true
-  };
+	state = {
+		isConnected: true,
+	};
 
-  componentDidMount() {
-    NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange);
-  }
+	componentDidMount() {
+		unsubscribe = NetInfo.addEventListener((state) => {
+			this.handleConnectivityChange(state.isConnected);
+		});
+	}
 
-  componentWillUnmount() {
-    NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectivityChange);
-  }
+	componentWillUnmount() {
+		unsubscribe();
+	}
 
-  handleConnectivityChange = isConnected => {
-    if (isConnected) {
-      this.setState({ isConnected });
-    } else {
-      this.setState({ isConnected });
-    }
-  };
+	handleConnectivityChange = (isConnected) => {
+		if (isConnected) {
+			this.setState({ isConnected });
+		} else {
+			this.setState({ isConnected });
+		}
+	};
 
-  render() {
-    if (!this.state.isConnected) {
-      return <MiniOfflineSign />;
-    }
-    return null;
-  }
+	render() {
+		if (!this.state.isConnected) {
+			return <MiniOfflineSign />;
+		}
+		return null;
+	}
 }
 
 const styles = StyleSheet.create({
-  offlineContainer: {
-    backgroundColor: '#b52424',
-    height: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    width,
-    position: 'absolute',
-    top: 24
-  },
-  offlineText: { color: '#fff' }
+	offlineContainer: {
+		backgroundColor: '#b52424',
+		height: 30,
+		justifyContent: 'center',
+		alignItems: 'center',
+		flexDirection: 'row',
+		width,
+		position: 'absolute',
+		top: 24,
+	},
+	offlineText: { color: '#fff' },
 });
 
 export default OfflineNotice;
